@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Question 1</title>
+    <link rel="stylesheet" href="q1.css">
+</head>
+<body onload="generateQuestion()">
+    <div class="container">
+        <div id="status">تعداد سوال:0،پاسخ درست:0،امتیاز:0</div>
+        <div id="question"></div>
+        <table id="word-table">
+            <tr id="table-row"></tr>
+        </table>
+        <input type="text" id="inp" />
+        <div id="answer"></div>
+        <button type="button" id="button" onclick="checkAnswer()">ارسال پاسخ</button>
+    </div>
+    
+
+    <script type="text/javascript">
+        var words = ["سلام", "سیب", "صداقت", "درس", "امتحان"]
+        var ans = ""
+        var txtResult = "Wrong!"
+        var score = 0
+        var selectedWord
+        var corrAnswer = 0
+        var qNum = 0
+        function generateQuestion(){
+            document.getElementById('table-row').innerHTML=""
+            qNum += 1
+            document.getElementById("answer").innerHTML = ""
+            var randN = Math.floor(Math.random() * 4)
+            selectedWord = words[randN]
+            score += selectedWord.length * 2
+            for(var i = selectedWord.length - 1; i >= 0; i--){
+                let e = document.createElement('td')
+                e.setAttribute("id", i)
+                e.addEventListener('click', function(event){
+                    var targetElement = event.target || event.srcElement;
+                    targetElement.innerHTML = selectedWord[targetElement.id]
+                    targetElement.style.backgroundColor = "white"
+                    score -= 1
+                    if(score == 0) generateQuestion()
+                })
+                document.getElementById('table-row').appendChild(e)
+            }
+            
+        }
+        
+
+        function checkAnswer(){
+            var inptxt = document.getElementById('inp').value 
+            console.log(inptxt)
+            if(inptxt == selectedWord){
+                txtResult = "Correct!"
+                corrAnswer += 1
+            }
+            else{
+                for(var i = 0; i < inptxt.length; i++){
+                    if(selectedWord[i] != inptxt[i]){
+                        score -= 1
+                    }
+                }
+            }
+            document.getElementById('answer').innerHTML = txtResult
+            document.getElementById('status').innerHTML = "تعداد سوال:" + qNum + "،پاسخ درست:" + corrAnswer + "،امتیاز:" + score;
+            console.log(corrAnswer)
+            document.getElementById('inp').value=""
+            generateQuestion()
+        }
+    </script>
+</body>
+</html>

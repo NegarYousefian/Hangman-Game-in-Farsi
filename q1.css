@@ -1,0 +1,39 @@
+table, td{
+    border: 1px solid black;
+}
+td{
+    background-color: yellow;
+    width: 8vw;
+    height: 15vh;
+    text-align: center;
+    font-family: Tahoma;
+    font-size: 30px;
+}
+td > div{
+    height: 15vh;
+    margin: auto;
+    display: none;
+}
+.container{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+#status, #question, #answer, #button, #inp{
+    margin: 5%;
+}
+#status{
+    font-size: 1rem;
+}
+#button{
+    font-size: 1rem;
+    padding: 1rem;
+}
+#inp{
+    padding: 1rem 2rem;
+}
